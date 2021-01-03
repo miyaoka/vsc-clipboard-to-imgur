@@ -2,7 +2,7 @@
   "name": "clipboard-to-imgur",
   "displayName": "clipboard to imgur",
   "description": "",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "miyaoka",
   "preview": true,
   "icon": "res/icon.png",
