@@ -34,7 +34,7 @@ async function paste(context: vscode.ExtensionContext) {
   // create imgur client
   const imgur = new Imgur(
     context,
-    vscode.workspace.getConfiguration('imgur-paste')
+    vscode.workspace.getConfiguration('clipboard-to-imgur')
   )
 
   let client
