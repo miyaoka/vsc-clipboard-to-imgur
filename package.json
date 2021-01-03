@@ -1,9 +1,19 @@
 {
   "name": "clipboard-to-imgur",
-  "displayName": "clipboard-to-imgur",
+  "displayName": "clipboard to imgur",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "miyaoka",
+  "preview": true,
+  "icon": "res/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miyaoka/vsc-clipboard-to-imgur"
+  },
+  "bugs": {
+    "url": "https://github.com/miyaoka/vsc-clipboard-to-imgur/issues"
+  },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.52.0"
   },
