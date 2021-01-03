@@ -16,7 +16,7 @@ export class Imgur {
     const client_id = this.config.get<string>('client_id')
     const isAnonymous = this.config.get<boolean>('isAnonymous')
 
-    if (client_id === '') {
+    if (!client_id) {
       throw new Error('client_id is required to upload a image to imgur.')
     }
 
