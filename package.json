@@ -46,22 +46,32 @@
         "clipboard-to-imgur.isAnonymous": {
           "type": "boolean",
           "default": false,
-          "description": "True if you prefer anonymous upload"
+          "description": "Use anonymous upload."
         },
         "clipboard-to-imgur.client_id": {
           "type": "string",
           "default": "",
-          "description": "Imgur client_id"
+          "description": "Imgur client_id (required)"
         },
         "clipboard-to-imgur.client_secret": {
           "type": "string",
           "default": "",
-          "description": "Imgur client_secret"
+          "description": "Imgur client_secret (required if not anonymous)"
         },
         "clipboard-to-imgur.album_id": {
           "type": "string",
           "default": "",
           "description": "Album id to upload images to"
+        },
+        "clipboard-to-imgur.saveDocument": {
+          "type": "boolean",
+          "default": true,
+          "description": "Save document after upload is completed."
+        },
+        "clipboard-to-imgur.placeholderText": {
+          "type": "string",
+          "default": "![uploading...](https://i.imgur.com/LEOtF90.gif)",
+          "description": "Placeholder text durling upload image."
         }
       }
     }

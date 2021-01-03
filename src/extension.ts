@@ -16,8 +16,6 @@ export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(disposable)
 }
 
-const placeHolderText = '![uploading...](https://i.imgur.com/LEOtF90.gif)'
-
 async function paste(context: vscode.ExtensionContext) {
   const editor = vscode.window.activeTextEditor
   if (!editor) return
@@ -31,11 +29,10 @@ async function paste(context: vscode.ExtensionContext) {
     return
   }
 
+  const config = vscode.workspace.getConfiguration('clipboard-to-imgur')
+
   // create imgur client
-  const imgur = new Imgur(
-    context,
-    vscode.workspace.getConfiguration('clipboard-to-imgur')
-  )
+  const imgur = new Imgur(context, config)
 
   let client
   try {
@@ -45,15 +42,23 @@ async function paste(context: vscode.ExtensionContext) {
     return
   }
 
+  const placeholderText = config.get<string>('placeholderText')
+  if (!placeholderText) {
+    vscode.window.showErrorMessage('Placeholder is empty.')
+    return
+  }
+  const isSave = config.get<boolean>('saveDocument') || false
+
   // add placeholder text
-  const placeHolderRange = new vscode.Range(
+  const placeholderRange = new vscode.Range(
     editor.selection.start,
-    editor.selection.start.translate(0, placeHolderText.length)
+    editor.selection.start.translate(0, placeholderText.length)
   )
 
   editor.edit((edit) => {
-    edit.insert(editor.selection.start, placeHolderText)
+    edit.insert(editor.selection.start, placeholderText)
   })
+  if (isSave) editor.document.save()
 
   try {
     const res = await client.Image.upload(base64Image)
@@ -61,8 +66,9 @@ async function paste(context: vscode.ExtensionContext) {
 
     // replace placeholder with imgurLink
     editor.edit((edit) => {
-      edit.replace(placeHolderRange, link)
+      edit.replace(placeholderRange, link)
     })
+    if (isSave) editor.document.save()
   } catch (err: unknown) {
     vscode.window.showErrorMessage((err as Error).message)
   }
